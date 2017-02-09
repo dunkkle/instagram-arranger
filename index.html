@@ -39,7 +39,7 @@
 		</div>
 	</div>
 
-	<div class="row grid">
+	<div id="the-grid" class="row grid">
 	
 
 			<div class="column column-33 grid-item draggable">
@@ -140,14 +140,32 @@ var fileArray = [
 
 console.log(fileArray[1]);
 
+
+//grab image url(s) from file array and create elements, append to dom
 function insertImageIntoPage(id) {
-	//grab image url(s) from file array and create elements, append to dom
+
+	var imageGridDiv = document.getElementById('the-grid');
+
+	console.log(imageGridDiv);
+
+	tempUrl = fileArray[1];
+	console.debug(tempUrl);
+
+	var newImage = document.createElement('img');
+		newImage.src = tempUrl;
+		console.debug(newImage);
+	
 
 	var newDiv = document.createElement("div");
 	newDiv.setAttribute('class', 'column column-33 grid-item draggable');
-	newDiv.innerHTML = "yayyyy";
+	newDiv.appendChild(newImage);
 
-	document.body.appendChild(newDiv);
+	imageGridDiv.appendChild(newDiv);
+
+	pckry.appended(newDiv);
+	draggies.push(newDiv);
+
+	pckry.reloadItems()
 
 
 }
