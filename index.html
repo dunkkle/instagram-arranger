@@ -99,32 +99,62 @@ for ( var i=0, len = draggableElems.length; i < len; i++ ) {
 function picChange(evt){ 
 //bring selected photo in
 
-//get files captured through input
-var fileInput = evt.target.files;
+	//get files captured through input
+	var fileInput = evt.target.files;
 
-	if (fileInput.length>0) {
-		//get the file
+		if (fileInput.length>0) {
+			//get the file
 
-		//window url 
-		var windowURL = window.URL || window.webkitURL; 
+			//window url 
+			var windowURL = window.URL || window.webkitURL; 
 
-		//picture url
-		var picURL = windowURL.createObjectURL(fileInput[0]);
+			//picture url
+			var picURL = windowURL.createObjectURL(fileInput[0]);
 
-		//create image
-		// var photo = new Image();
-		var photo = document.querySelector("#myphoto");
+			//create image
+			// var photo = new Image();
+			var photo = document.querySelector("#myphoto");
 
-		//load photo into canvas
-		photo.src = picURL;
+			//load photo into canvas
+			//TODO - not needed after functionInsertImageIntoPage is setu up..
+			photo.src = picURL;
 
-		//release object url
-		windowURL.revokeObjectURL(picURL);
-	}
+			//push that shiz into the fileArray
+			fileArray.push(picURL);
+			console.table(fileArray);
+
+			//release object url
+			//windowURL.revokeObjectURL(picURL);
+		}
 
 
 }
 
+var fileArray = [
+	"./dev-images/image1.jpg",
+	"./dev-images/image2.jpg",
+	"./dev-images/image3.jpg",
+	"./dev-images/image4.jpg",
+	"./dev-images/image5.jpg"
+]
+
+console.log(fileArray[1]);
+
+function insertImageIntoPage(id) {
+	//grab image url(s) from file array and create elements, append to dom
+
+	var newDiv = document.createElement("div");
+	newDiv.setAttribute('class', 'column column-33 grid-item draggable');
+	newDiv.innerHTML = "yayyyy";
+
+	document.body.appendChild(newDiv);
+
+
+}
+
+function removeImageFromPage() {
+	//remove image from the grid AND the file array
+}
 
 </script>
 
