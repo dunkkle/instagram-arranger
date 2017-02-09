@@ -1,27 +1,25 @@
 <!DOCTYPE html> 
 <html>
 <head>
+
+	<meta charset="utf-8">
+	<!-- Makes this work on mobile devices without being super zoomed out -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<title>Arrange photos to decide what to post next on Instagram!</title>
 	
 	<script type="text/javascript" src="./scripts.js"></script>
 	<script type="text/javascript" src="./assets/packery.min.js"></script>
 	<script type="text/javascript" src="./assets/dragabilly.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./normalize.css">
+	<link rel="stylesheet" type="text/css" href="./milligram.css">
 	<link rel="stylesheet" type="text/css" href="./styles.css">
 
-
 	<style type="text/css">
-		.grid-item { width: 22%; }
-		.grid-item--width2 { width: 50%; }
-		.grid-item,
-		.grid-item--width2 {
-			/*height: 200px;*/
-			float: left;
-			background-color: orange;
-			display: inline-block;
-
-		}
-
+		
 	</style>
+
 </head>
 <body>
 
@@ -33,28 +31,52 @@
 - menu-top?
 - session persistence - how to keep references to local images?
  -->
+<div class="container">
+	<div class="row">
+		<div class="column-33">
+			<p>Add an image from your photo library!</p>
+			<input type="file" accept="image/*" multiple onchange="picChange(event)"/>
+		</div>
+	</div>
 
-<p>Add an image from your photo library!</p>
-<input type="file" accept="image/*" multiple onchange="picChange(event)"/>
+	<div class="row grid">
+	
 
+			<div class="column column-33 grid-item draggable">
+				<img class="" src="./dev-images/image1.jpg">
+			</div>
 
-<div class="grid container">
-	<img class="grid-item draggable" src="./dev-images/image1.jpg">
-	<img class="grid-item draggable" src="./dev-images/image2.jpg">
-	<img class="grid-item draggable" src="./dev-images/image3.jpg">
-	<img class="grid-item draggable" src="./dev-images/image4.jpg">
-	<img id="myphoto" class="grid-item draggable" src="">
+			<div class="column column-33 grid-item draggable">
+				<img class="" src="./dev-images/image1.jpg">
+			</div>
+
+			<div class="column column-33 grid-item draggable">
+				<img class="" src="./dev-images/image2.jpg">
+			</div>
+
+			<div class="column column-33 grid-item draggable">
+				<img class="" src="./dev-images/image3.jpg">
+			</div>
+
+			<div class="column column-33 grid-item draggable">
+				<img class="" src="./dev-images/image4.jpg">
+			</div>
+
+			<div class="column column-33 grid-item draggable">
+				<img id="myphoto" class="" src="">
+			</div>
+	
+	</div>
 
 </div>
-
 <script type="text/javascript">
 
 var elem = document.querySelector('.grid');
 var pckry = new Packery( elem, {
   // options
-  itemSelector: '.grid-item',
-  columnWidth: 100
-
+  itemSelector: '.column-33',
+  columnWidth: '.column-33',
+  percentPosition: true
 });
 
 // if you have multiple .draggable elements
@@ -67,7 +89,7 @@ for ( var i=0, len = draggableElems.length; i < len; i++ ) {
   var draggableElem = draggableElems[i];
   var draggie = new Draggabilly( draggableElem, {
     // options...
-    containment: '.container'
+    //containment: '.grid'
   });
   draggies.push( draggie );
   pckry.bindDraggabillyEvents( draggie );
