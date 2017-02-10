@@ -144,4 +144,8 @@ var fileArray = [
 	window.onload = function() {
 		initialImageLoadFromArray();
 		makeStuffDraggable();
+
 	};
+console.log('yeeaahh buddyyy');
+
+
