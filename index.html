@@ -17,164 +17,28 @@
 	<link rel="stylesheet" type="text/css" href="./styles.css">
 
 	<style type="text/css">
-		
+		.column-33 {
+			padding: 10px;
+		}
 	</style>
 
 </head>
 <body>
 
-<!-- TODO
-
-- style this up, mobile-first
-- function to add multiple unique images (forEach...)
-- instagram API - import last 3-6 images?
-- menu-top?
-- session persistence - how to keep references to local images?
- -->
 <div class="container">
 	<div class="row">
 		<div class="column-33">
-			<p>Add an image from your photo library!</p>
-			<input type="file" accept="image/*" multiple onchange="picChange(event)"/>
+			<h3>Add an image from your photo library!</h3>
+			<input type="file" accept="image/*" multiple onchange="addImagesFromLocalLibrary(event)"/>
 		</div>
 	</div>
 
-	<div id="the-grid" class="row grid">
-	
-
-			<div class="column column-33 grid-item draggable">
-				<img class="" src="./dev-images/image1.jpg">
-			</div>
-
-			<div class="column column-33 grid-item draggable">
-				<img class="" src="./dev-images/image1.jpg">
-			</div>
-
-			<div class="column column-33 grid-item draggable">
-				<img class="" src="./dev-images/image2.jpg">
-			</div>
-
-			<div class="column column-33 grid-item draggable">
-				<img class="" src="./dev-images/image3.jpg">
-			</div>
-
-			<div class="column column-33 grid-item draggable">
-				<img class="" src="./dev-images/image4.jpg">
-			</div>
-
-			<div class="column column-33 grid-item draggable">
-				<img id="myphoto" class="" src="">
-			</div>
-	
-	</div>
+	<div id="the-grid" class="row grid"></div>
 
 </div>
-<script type="text/javascript">
 
-var elem = document.querySelector('.grid');
-var pckry = new Packery( elem, {
-  // options
-  itemSelector: '.column-33',
-  columnWidth: '.column-33',
-  percentPosition: true
-});
+<script type="text/javascript" src="./app.js"></script>
 
-// if you have multiple .draggable elements
-// get all draggie elements
-var draggableElems = document.querySelectorAll('.draggable');
-// array of Draggabillies
-var draggies = []
-// init Draggabillies
-for ( var i=0, len = draggableElems.length; i < len; i++ ) {
-  var draggableElem = draggableElems[i];
-  var draggie = new Draggabilly( draggableElem, {
-    // options...
-    //containment: '.grid'
-  });
-  draggies.push( draggie );
-  pckry.bindDraggabillyEvents( draggie );
-}
-
-
-function picChange(evt){ 
-//bring selected photo in
-
-	//get files captured through input
-	var fileInput = evt.target.files;
-
-		if (fileInput.length>0) {
-			//get the file
-
-			//window url 
-			var windowURL = window.URL || window.webkitURL; 
-
-			//picture url
-			var picURL = windowURL.createObjectURL(fileInput[0]);
-
-			//create image
-			// var photo = new Image();
-			var photo = document.querySelector("#myphoto");
-
-			//load photo into canvas
-			//TODO - not needed after functionInsertImageIntoPage is setu up..
-			photo.src = picURL;
-
-			//push that shiz into the fileArray
-			fileArray.push(picURL);
-			console.table(fileArray);
-
-			//release object url
-			//windowURL.revokeObjectURL(picURL);
-		}
-
-
-}
-
-var fileArray = [
-	"./dev-images/image1.jpg",
-	"./dev-images/image2.jpg",
-	"./dev-images/image3.jpg",
-	"./dev-images/image4.jpg",
-	"./dev-images/image5.jpg"
-]
-
-console.log(fileArray[1]);
-
-
-//grab image url(s) from file array and create elements, append to dom
-function insertImageIntoPage(id) {
-
-	var imageGridDiv = document.getElementById('the-grid');
-
-	console.log(imageGridDiv);
-
-	tempUrl = fileArray[1];
-	console.debug(tempUrl);
-
-	var newImage = document.createElement('img');
-		newImage.src = tempUrl;
-		console.debug(newImage);
-	
-
-	var newDiv = document.createElement("div");
-	newDiv.setAttribute('class', 'column column-33 grid-item draggable');
-	newDiv.appendChild(newImage);
-
-	imageGridDiv.appendChild(newDiv);
-
-	pckry.appended(newDiv);
-	draggies.push(newDiv);
-
-	pckry.reloadItems()
-
-
-}
-
-function removeImageFromPage() {
-	//remove image from the grid AND the file array
-}
-
-</script>
 
 </body>
 </html>
